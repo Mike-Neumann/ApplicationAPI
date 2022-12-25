@@ -12,4 +12,7 @@ public abstract class Screen extends JPanel implements MouseListener, KeyListene
         addMouseListener(this);
         addKeyListener(this);
     }
+
+    public abstract void onEnable();
+    public abstract void onDisable();
 }

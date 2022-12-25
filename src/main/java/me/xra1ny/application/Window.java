@@ -61,11 +61,13 @@ public abstract class Window extends JFrame implements MouseListener, KeyListene
 
             remove(lastScreen);
             lastScreen.setEnabled(false); // Disable last Screen
+            lastScreen.onDisable();
             lastScreen.updateUI();
             lastScreen.revalidate();
 
-            currentScreen.setEnabled(true); // Enable current Screen
             add(currentScreen);
+            currentScreen.setEnabled(true); // Enable current Screen
+            currentScreen.onEnable();
             currentScreen.updateUI();
             currentScreen.revalidate();
         }

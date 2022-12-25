@@ -46,4 +46,14 @@ public class DefaultScreen extends Screen {
     public void keyReleased(KeyEvent e) {
 
     }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
+    }
 }
