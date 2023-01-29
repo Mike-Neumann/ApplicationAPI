@@ -7,11 +7,12 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 
 @Slf4j
-public abstract class Window extends JFrame implements MouseListener, KeyListener {
+public abstract class Window extends JFrame {
     private String initialTitle = "";
     private Dimension initialSize = new Dimension(640, 480); // Instantiate new Dimension for Size of this Window (480p)
 
@@ -44,9 +45,6 @@ public abstract class Window extends JFrame implements MouseListener, KeyListene
         setTitle(initialTitle);
 
         setVisible(true);
-
-        addMouseListener(this);
-        addKeyListener(this);
     }
 
     /** Enabled and show the specified Screen on this Window */
@@ -66,10 +64,20 @@ public abstract class Window extends JFrame implements MouseListener, KeyListene
             lastScreen.revalidate();
 
             add(currentScreen);
+            currentScreen.requestFocus();
+            currentScreen.addMouseListener(currentScreen);
+            currentScreen.addKeyListener(currentScreen);
             currentScreen.setEnabled(true); // Enable current Screen
             currentScreen.onEnable();
             currentScreen.updateUI();
             currentScreen.revalidate();
         }
     }
+
+    public abstract void onKeyPress(@NotNull KeyEvent e);
+    public abstract void onKeyRelease(@NotNull KeyEvent e);
+    public abstract void onMousePress(@NotNull MouseEvent e);
+    public abstract void onMouseRelease(@NotNull MouseEvent e);
+    public abstract void onMouseEnterComponent(@NotNull MouseEvent e);
+    public abstract void onMouseExitComponent(@NotNull MouseEvent e);
 }
